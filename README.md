@@ -14,8 +14,9 @@ Link: <b><u>https://chandrahas-b-stockvision-final-noz83u.streamlit.app/ </u></b
   
 ## Design:
   After trying out multiple moedels and different architectures, the model was found to perform well when it had a combination of multiple Conv1D and LSTM layers without any skip connections. Using this design, the model was able to achieve a good Mean Squared Error score.
+  The oneAPI AI toolkit provided optimizations for the tensorflow APIs which improved the speed of training of the model with minimal loss in precision of the values.
   ![image](https://user-images.githubusercontent.com/84665480/225654048-566e8770-8884-4b4a-b067-f9415a91b233.png)
-The model was trained with 150k parameters and also consists of around 1k non-trainable parameters which were assigned in Layer and Batch Normalization.
+The model was trained with 2.3 million parameters and also consists of around 12k non-trainable parameters which were assigned in Layer and Batch Normalization.
 Hence, it is capable of generating accurate results in short duration of time and is highly scalable as it is trained on around 60-70 trending stocks of 2022-23.
 
 ## Usability:
