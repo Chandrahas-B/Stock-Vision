@@ -21,3 +21,16 @@ Hence, it is capable of generating accurate results in short duration of time an
   
 ## Prototype build:
  The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. This project can be used as a baseline prototype to create a more robust product.
+ 
+## Note:
+  The above model was developed on different environments as it needed around 2000 epochs to converge. Some of the epochs were trained on the dev-cloud until resources were reached maximum limit and some of them have been trained on the local system in an intel oneDNN optimized environment and a non-optimized environment.
+  Inference time was calculated to compare the performance between the optimized and non-optimized speed of training in the optimized and non-optimized oneDNN environments:
+  Without oneAPI optimization: (200 epochs)
+    Time taken to run the model:	## 6985.663848876953
+    Time taken to run the notebook:	## 6991.916996240616
+    
+  With oneAPI optimized oneDNN environment: (100 epochs)
+    Time taken to run the model:	 ## 2402.2500801086426
+    Time taken to run the notebook:	 ## 2408.7944316864014
+  As we can see, oneDNN optimization helps the model to train faster and optimizes the CPU calculations without having a great impact on the accuracy.
+ 
