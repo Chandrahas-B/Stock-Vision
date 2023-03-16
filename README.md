@@ -19,6 +19,5 @@ Hence, it is capable of generating accurate results in short duration of time an
   The project was aimed to be used on a daily basis which can assist users in understand the graph movement. This can also interest new users to invest in stocks and help them understand the graph movements which can help them in making wise decisions in investing.
   The project has covered functionalities such as image processing for extracting graphs and can forecast around 150 values. 
   
-  ## Prototype build:
-    The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. 
-    This project can be used as a baseline prototype to create a more robust product.
+## Prototype build:
+ The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. This project can be used as a baseline prototype to create a more robust product.
