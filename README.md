@@ -1,6 +1,9 @@
 # Stock-Vision
 Stock market forecasting by taking images containing graphs of the stocks as input.
 
+The project is deployed using streamlit cloud in an intel conda environment using the "environment.yml" script.
+Link: <b><u>https://chandrahas-b-stockvision-final-noz83u.streamlit.app/ </u></b>
+
 ## Adaptibility and Impact:
   Traditional forecasting techniques are heavily dependent on tabular data for predicting the stock movement. Hence, our team wanted to try a unique approach to solve the forecasting problems. In this project, we extract graphs from images using various image processing techniques and use them to forecast the next 100-200 future values of that particular stock on the input image. This helps the user to decide if he/she has to invest in the stock.
 
