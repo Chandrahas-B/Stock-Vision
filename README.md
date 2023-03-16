@@ -20,4 +20,5 @@ Hence, it is capable of generating accurate results in short duration of time an
   The project has covered functionalities such as image processing for extracting graphs and can forecast around 150 values. 
   
   ## Prototype build:
-    The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. This project can be used as a baseline prototype to create a more robust product.
+    The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. 
+    This project can be used as a baseline prototype to create a more robust product.
