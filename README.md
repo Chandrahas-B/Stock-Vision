@@ -1,34 +1,31 @@
 # Stock-Vision
 Stock market forecasting by taking images containing graphs of the stocks as input.
 
-The project is deployed using streamlit cloud in an intel conda environment using the "environment.yml" script.
+The project is built using Intel oneAPI AI toolkit and is also deployed on cloud using the same environment ("environment.yml").
 Link: <b><u>https://chandrahas-b-stockvision-final-noz83u.streamlit.app/ </u></b>
 
 ## Adaptibility and Impact:
-  Traditional forecasting techniques are heavily dependent on tabular data for predicting the stock movement. Hence, our team wanted to try a unique approach to solve the forecasting problems. In this project, we extract graphs from images using various image processing techniques and use them to forecast the next 100-200 future values of that particular stock on the input image. This helps the user to decide if he/she has to invest in the stock.
+  Conventional forecasting techniques for predicting stock movement rely heavily on tabular data. In an effort to explore new approaches to this problem, our team has developed a novel method that involves using image processing techniques to extract graphs from images. By analyzing these graphs, we can forecast future stock values for the next 100-200 periods, providing users with valuable insights into stock investment. Our approach represents a departure from traditional forecasting methods and allows us to extract information from visual data that was previously inaccessible. This unique method provides users with a more holistic understanding of stock movement and can help inform investment decisions.
 
 ## Code:
-  The forecasting model was developed using the AI toolkit which provided optimizations to build deep learning models. After experimenting with many models and architecture, the best model was found which was a combination of Conv1d and LSTM layers. These layers were optimized by the toolkit which improved the speed of the training by almost 1.5x times with minimal loss in the accuracy.
-  The dataset consists of graph images which were hand-picked by searching for the stocks and takiyyng screenshots of them. Each of the images contained a graph which was converted into a tabular data by performing bit-masking and other pre-processing techniques. The dataset comprised around 224 images which contains continuous graphs. These graphs were broken down into individual points and then used as the training set. Hence, the training set had a total of around 1.2 million unique records.
+  The forecasting model was developed using an AI toolkit that provided optimizations to build deep learning models. After experimenting with multiple models and architectures, the best model was identified as a combination of Conv1d and LSTM layers. The toolkit optimized these layers, resulting in a training speed that was 1.5x faster with minimal loss in accuracy.
+  The dataset used in the project consisted of graph images that were hand-picked by searching for the relevant stocks and taking screenshots of them. Each image contained a graph, which was then converted into tabular data using bit-masking and other pre-processing techniques. The dataset comprised around 210 images, all of which contained continuous graphs. These graphs were broken down into individual points and used for generating training set, resulting in a total of approximately 1.2 million unique records.
   
   
 ## Design:
-  After trying out multiple moedels and different architectures, the model was found to perform well when it had a combination of multiple Conv1D and LSTM layers without any skip connections. Using this design, the model was able to achieve a good Mean Squared Error score.
-  The oneAPI AI toolkit provided optimizations for the tensorflow APIs which improved the speed of training of the model with minimal loss in precision of the values.
+  After experimenting with multiple models and architectures, a combination of multiple Conv1D and LSTM layers without skip connections was found to perform well in achieving a good Mean Squared Error score. 
+  The oneAPI AI toolkit provided optimizations for the TensorFlow APIs, which improved the speed of training without sacrificing precision in the values. This optimized toolkit allowed for efficient and accurate training of the model with improved performance.
   ![image](https://user-images.githubusercontent.com/84665480/225654048-566e8770-8884-4b4a-b067-f9415a91b233.png)
-The model was trained with 2.3 million parameters and also consists of around 12k non-trainable parameters which were assigned in Layer and Batch Normalization.
-Hence, it is capable of generating accurate results in short duration of time and is highly scalable as it is trained on around 60-70 trending stocks of 2022-23.
-
+The model was trained with 2.3 million trainable parameters and approximately 12k non-trainable parameters assigned in the Layer and Batch Normalization. With this architecture, the model can generate accurate results in a short amount of time and is highly scalable. It was trained on 60-70 trending stocks of 2022-23, and its performance can be improved by training it on additional stocks. This scalability makes the model flexible and adaptable to future changes in the stock market.
 ## Usability:
   The project was aimed to be used on a daily basis which can assist users in understand the graph movement. This can also interest new users to invest in stocks and help them understand the graph movements which can help them in making wise decisions in investing.
   The project has covered functionalities such as image processing for extracting graphs and can forecast around 150 values. 
   
 ## Prototype build:
- The project has been implemented with various functionalities which can be used as a viable product to forecast stocks on a daily basis. This project can be used as a baseline prototype to create a more robust product.
+ The project has been implemented with several functionalities that make it a viable tool for daily stock forecasting. As a baseline prototype, it can serve as the foundation for creating a more robust product. With its various functionalities, the project represents a significant step towards the development of a reliable and comprehensive stock forecasting tool. Its potential to be further developed and refined makes it an exciting prospect for investors and analysts seeking to make informed decisions in the stock market.
  
 ## Note:
-  The above model was developed on different environments as it needed around 2000 epochs to converge. Some of the epochs were trained on the dev-cloud until resources were reached maximum limit and some of them have been trained on the local system in an intel oneDNN optimized environment and a non-optimized environment.
-  Inference time was calculated to compare the performance between the optimized and non-optimized speed of training in the optimized and non-optimized oneDNN environments:<br/>
+  The model was developed on various environments due to the large number of epochs required for convergence. Some epochs were trained on the dev-cloud until resource limits were reached, while others were trained on local systems in optimized and non-optimized Intel oneDNN environments. Inference time was measured to compare the performance between the optimized and non-optimized training speeds in these environments.<br/>
   <b>Without oneAPI optimization</b>: (200 epochs)<br/>
     Time taken to train the model:	<b>6985.663848876953 s</b> <br/>
     Time taken to run the notebook:	<b>6991.916996240616 s</b> <br/>
