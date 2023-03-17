@@ -25,7 +25,7 @@ The model was trained with 2.3 million trainable parameters and approximately 12
  The project has been implemented with several functionalities that make it a viable tool for daily stock forecasting. As a baseline prototype, it can serve as the foundation for creating a more robust product. With its various functionalities, the project represents a significant step towards the development of a reliable and comprehensive stock forecasting tool. Its potential to be further developed and refined makes it an exciting prospect for investors and analysts seeking to make informed decisions in the stock market.
  
 ## Note:
-  The model was developed on various environments due to the large number of epochs required for convergence. Some epochs were trained on the dev-cloud until resource limits were reached, while others were trained on local systems in optimized and non-optimized Intel oneDNN environments. Inference time was measured to compare the performance between the optimized and non-optimized training speeds in these environments.<br/>
+  The model was developed on various environments due to the large number of epochs required for convergence. Some epochs were trained on the dev-cloud until resource limits were reached, while others were trained on local systems in optimized and non-optimized Intel oneDNN environments. Inference time was measured to compare the performance between the optimized and non-optimized training speeds in these environments.<br/><br/>
   <b>Without oneAPI optimization</b>: (200 epochs)<br/>
     Time taken to train the model:	<b>6985.663848876953 s</b> <br/>
     Time taken to run the notebook:	<b>6991.916996240616 s</b> <br/>
