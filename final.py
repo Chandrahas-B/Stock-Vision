@@ -10,16 +10,21 @@ from tensorflow.keras.models import load_model
 import tensorflow as tf
 
 st.set_page_config(layout="wide")
-st.title("Stock Vision")
 
+st.title("Stock Vision")
+colx, coly = st.columns(2)
 model = None
 def load_model():
   model=tf.keras.models.load_model('./StockVision.h5', compile= False)
   return model
 with st.spinner('Model is being loaded..'):
   model=load_model()
-
-st.write(""" ## Predict stocks using computer vision""")
+with colx:
+    st.write(""" ## Predict stocks using computer vision    \n
+     Please input an image which contains a graph in it like the example image. \n""")
+with coly:
+    with st.expander("See sample input image"):
+        st.image(Image.open("./Udemy.png"), caption="Example of input image")
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
@@ -27,6 +32,14 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 scaler = MinMaxScaler(feature_range=(1,8))
 start_point = -1
 time_step = 224
+
+def dataset(dataset, time_step):
+    X = []
+    Y = []
+    for i in range (len(dataset)-time_step -1):
+        X.append(dataset[i:(i+time_step)])
+        Y.append(dataset[i + time_step])
+    return np.array(X), np.array(Y)
 
 def transform(i, final = 0):
     global points, start_point
@@ -69,73 +82,86 @@ else:
     new_img = Image.open(pred_path)
     with col1:
         st.image(new_img, use_column_width=True)
-    new_img = np.array(new_img)
+        new_img  = cv2.cvtColor(np.array(new_img), cv2.COLOR_BGR2RGB)
 
     try:
         points = np.empty((0,2))
         transform(pred_path, final = 1)
         
         corrected_points = points[points[:, 0].argsort()]
-                                        
+        X_pred, Y_pred = dataset(points, time_step=time_step)
+                                    
         value = corrected_points[:,1]
-
         dummy = value.copy()
         df = pd.DataFrame(dummy, columns=['Price'])
-
-        ans = np.array(df.iloc[-time_step:,0])
-
+        x_pred = np.array(df['Price'])
+        X_pred, y_pred = dataset(x_pred, time_step)
+        # out = (new_img.shape[1] - len(df.iloc[:,0]))//4 - 10
+        out = new_img.shape[1]
+        # print("out", out)
+        ans = np.array(df.iloc[:time_step,0])
+        y0 = scaler.inverse_transform(np.array([0,df['Price'].iloc[-1]]).reshape(1, -1))[0][1]
+        color_pred = {'red': (255, 0, 0), 'green': (0, 255, 0)}
+        color = (127, 127, 127)
+        new_img = cv2.line(new_img, [int(start_point + time_step - 100), int(y0)], [1000, int(y0)], color = color, thickness = 1)
         pred = []
         with col2:
             with st.spinner('Image is being generated'):
-                while len(pred) < time_step//1.5:
-                    y = model.predict(ans[-time_step:].reshape(1, -1), verbose = 0).flatten()
+                generated_img = st.empty()
+                pred = []
+                x = int(start_point) + time_step
+                new_points = []
+                jump = 1
+                prev_point = [x-3, int(scaler.inverse_transform([[0,df['Price'].tail(1).item()]])[0,1])]
+                p_point = prev_point.copy()
+                new_img  = cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB)
+                while True:
+                # while out:
+                    y = model.predict(ans[-time_step:].reshape(1, -1), verbose = 0).item()
                     ans = np.append(ans, y)
                     pred.append(y)
+                    Y = int(scaler.inverse_transform([[0,y]])[0,1])
+                    x += 1
+                    new_points.append([int(x+(jump*2)),Y])
+                    new_img = cv2.line(new_img,prev_point,new_points[-1], (200, 87, 200),1)
+                    prev_point = new_points[-1]
+                    jump += 1
+                    generated_img.image(new_img)
+                    if int(x+jump*2) > out:
+                        break
+                last_out = int(scaler.inverse_transform([[0, pred[-1]]])[0][1])
+                if last_out < y0:
+                    color = color_pred['green']
+                elif last_out > y0:
+                    color = color_pred['red']
 
-        f1 = np.empty((0,2))
-        for idx, val in enumerate(pred):
-            f1 = np.append(f1, [[idx, val[0]]], axis = 0)
-        pred = scaler.inverse_transform(f1)
-        pred = pred[:,1]
-        pred = np.array( np.round(pred),dtype='int64')
+                new_points = []
+                prev_point = p_point
+                x = int(start_point) + time_step
+                for i in pred:
+                    i = int(scaler.inverse_transform([[0, i]])[0][1])
+                    new_points.append([x,i])
+                    x += 1
+                jump = 1
+                for x,y in new_points:
+                    new_img = cv2.line(new_img, prev_point, [int(x+jump*2),y], color, 2)
+                    prev_point = [x+int(jump*2),y]
+                    jump += 1
+                generated_img.image(new_img)
 
-        new_points = []
-        x = int(start_point) + time_step
-        for i in pred:
-            new_points.append([x,i])
-            x += 1
+            with col1:
+                suggestion = None
+                if (y0 - last_out) >= 20:
+                    suggestion = "This is a strong buy recommendation. Don't miss this opportunity!"
+                    color = 'green'
+                elif (y0 - last_out) > 0:
+                    suggestion = "Profit margin is quite low."
+                    color = 'green'
+                else:
+                    suggestion = "The particular stock is not going to do well for the next time period.<br/>Not recommended to buy now."
+                    color = 'red'
 
-        y0 = int(scaler.inverse_transform(np.array([0,df['Price'].iloc[-1]]).reshape(1, -1))[0][1])
-        color_pred = {'red': (0, 0, 255), 'green': (0, 255, 0)}
-        color = (127, 127, 127)
-        if pred[-1] < y0:
-            color = color_pred['green']
-        elif pred[-1] > y0:
-            color = color_pred['red']
+                st.markdown(f"<h4 style='color: {color};'>{suggestion}</h4>", unsafe_allow_html=True)
 
-        prev_point = tuple(new_points[0])
-
-        begin = np.array([start_point + time_step-2, y0], dtype = int)
-        new_img = cv2.line(new_img, prev_point, begin, color, 2)
-        jump = 1
-        for x,y in new_points:
-            new_img = cv2.line(new_img, prev_point, [int(x*jump),y], color, 2)
-            prev_point = [int(x*jump),y]
-
-        new_img  = cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB)
-        plt.axis('off')
-        plt.plot([start_point + time_step-100, 1000], [y0, y0], linestyle = 'dashed')
-        plt.imshow(new_img)
-        with col2:
-            st.pyplot(plt)
-        with col1:
-            suggestion = None
-            if pred[-1] > 2*y0:
-                suggestion = "Strong buy/ hold the stock"
-            elif pred[-1] > y0:
-                suggestion = "Buy"
-            else:
-                suggestion = "Sell"
-            st.write("### Recommendation:{suggestion}")
     except:
         st.write('# Please input an image which contains a graph which can be forecasted')
