@@ -45,5 +45,5 @@ The model was trained with almost 150k trainable parameters. With this architect
  ```git clone https://github.com/Chandrahas-B/Stock-Vision <br/>
  conda create --name <env_name> --file environment.yml (or) conda env create -f environment.yml <br/>
  conda activate <env_name> <br/>
- streamlit run final.py ```
+ streamlit run final.py
  
