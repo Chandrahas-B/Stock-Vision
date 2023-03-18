@@ -39,7 +39,7 @@ The model was trained with almost 150k trainable parameters. With this architect
   <b>With oneAPI optimized oneDNN environment</b>: (100 epochs with 100 images)<br/>
     Time taken to train the model:	 <b>2402.2500801086426 s</b><br/>
     Time taken to run the notebook:	 <b>2408.7944316864014 s</b><br/>
-  As we can see, oneDNN optimization helps the model to train faster(almost 1.5x) and optimizes the CPU calculations without having a great impact on the accuracy.
+  As we can see, oneDNN optimization helps the model to train faster(almost 50% faster) and optimizes the CPU calculations without having a great impact on the accuracy.
  <br/><br/>
  <i>Steps to run the above project locally:</i> <br/>
  Clone the repository.
