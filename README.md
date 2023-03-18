@@ -8,7 +8,9 @@ Link: <b><u>https://chandrahas-b-stockvision-final-noz83u.streamlit.app/ </u></b
   Conventional forecasting techniques for predicting stock movement rely heavily on tabular data. In an effort to explore new approaches to this problem, our team has developed a novel method that involves using image processing techniques to extract graphs from images. By analyzing these graphs, we can forecast future stock values for the next 100-200 periods, providing users with valuable insights into stock investment. Our approach represents a departure from traditional forecasting methods and allows us to extract information from visual data that was previously inaccessible. This unique method provides users with a more holistic understanding of stock movement and can help inform investment decisions. <br/>
 
 
-https://user-images.githubusercontent.com/84665480/226104674-dda15689-b4cc-437f-b2da-073af5ac4b74.mp4
+
+https://user-images.githubusercontent.com/84665480/226104730-b15ef19b-dfd7-4624-bf2f-9cdd513cd89b.mp4
+
 
 
 ## Code:
