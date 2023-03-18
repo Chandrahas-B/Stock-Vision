@@ -32,7 +32,7 @@ The model was trained with almost 150k trainable parameters. With this architect
  
 ## Note:
   The model was developed on various environments due to the large number of epochs required for convergence. Some epochs were trained on the dev-cloud until resource limits were reached, while others were trained on local systems in optimized and non-optimized Intel oneDNN environments. Inference time was measured to compare the performance between the optimized and non-optimized training speeds in these environments.<br/><br/>
-  <b>Without oneAPI optimization</b>: (200 epochs with 120 images)<br/>
+  <b>Without oneAPI optimization</b>: (200 epochs with 150 images)<br/>
     Time taken to train the model:	<b>6985.663848876953 s</b> <br/>
     Time taken to run the notebook:	<b>6991.916996240616 s</b> <br/>
     
