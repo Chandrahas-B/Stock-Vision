@@ -1,7 +1,7 @@
 # Stock-Vision
 Stock market forecasting by taking images containing graphs of the stocks as input.
 
-The project is built using Intel oneAPI AI toolkit and is also deployed on cloud using the same environment ("environment.yml").
+The project is built using Intel oneAPI AI toolkit and is also deployed on cloud using the same environment ("environment.yml"). <br/>
 Link: <b><u>https://chandrahas-b-stockvision-final-noz83u.streamlit.app/ </u></b>
 
 ## Adaptibility and Impact:
