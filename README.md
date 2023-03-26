@@ -15,7 +15,7 @@ https://user-images.githubusercontent.com/84665480/226104730-b15ef19b-dfd7-4624-
 
 
 ## Code:
-  The forecasting model was developed using an AI toolkit that provided optimizations to build deep learning models. After experimenting with multiple models and architectures, the best model was identified as a combination of Conv1d and LSTM layers. The toolkit optimized these layers, resulting in a training speed that was 1.5x faster with minimal loss in accuracy.  <br/><br/>
+  The forecasting model was developed using an AI toolkit that provided optimizations to build deep learning models. After experimenting with multiple models and architectures, the best model was identified as a combination of Conv1d and LSTM layers.  <br/><br/>
   The dataset used in the project consisted of graph images that were hand-picked by identifying the relevant stocks and taking screenshots of them. Each image contained a graph, which was then converted into tabular data using bit-masking and other pre-processing techniques. The dataset comprised around 210 images, all of which contained continuous graphs. These graphs were broken down into individual points and used for generating training set, resulting in a total of approximately 1.2 million unique records.
   
   
